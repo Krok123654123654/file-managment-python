@@ -44,10 +44,8 @@ def main():
    parser.add_argument(
       "--tworzenie_odczyt", type=str, default="t", nargs="+", required = False, help="Tworzenie lub odczyt(t/o), domyślnie odczyt"
    )
-
-
-
    args = parser.parse_args()
+
 
    if(len(args.miesiace) != len(args.dni)):
       raise ValueError("Dla każdego miesiąca musi być podany dzień")
