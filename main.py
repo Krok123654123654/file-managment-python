@@ -75,19 +75,18 @@ def generate_or_read_paths(args):
          index1 = days_order.index(days)
          index2 = index1 + 1
       for i in list(days_full.keys())[index1 : index2]:
-            if(args.read_or_write !="t"):
-               paths.append(os.path.join(os.getcwd(),months,days_full[i],get_time(days_index, args.times)))
-            else :
-               paths.append(os.path.join(os.getcwd(),months,days_full[i],get_time(days_index, args.times),"Dane.csv"))
+            paths.append(os.path.join(os.getcwd(),months,days_full[i],get_time(days_index, args.times)))
             days_index+=1
-   print(paths)
    if(args.read_or_write != "t"):
       for path in paths:
          odczyt_z_csv(path)
    else:
       for path in paths:
          os.makedirs(path, exist_ok=True)
-         zapis_do_csv(path)
+         file_path = os.path.join(path, "Dane.csv")
+         with open(file_path, mode='w') as file:
+            file.write("\n")
+         zapis_do_csv(file_path)
 
 
 
@@ -99,10 +98,13 @@ def main():
       "--times", type=str, default="r", nargs="+", required = False, help="Jaka pora dnia (r/w), domyślnie rano"
    )
    parser.add_argument(
-      "--read_or_write", type=str, default="t", nargs="+", required = False, help="Tworzenie lub odczyt(t/o), domyślnie odczyt"
+      "--read_or_write", type=str, default="t", required = False, help="Tworzenie lub odczyt(t/o), domyślnie odczyt"
    )
    args = parser.parse_args()
 
-
-   if(len(args.miesiace) != len(args.dni)):
+   if(len(args.months) != len(args.days)):
       raise ValueError("Dla każdego miesiąca musi być podany dzień")
+   generate_or_read_paths(args)
+
+if __name__ == "__main__":
+    main()
