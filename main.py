@@ -99,7 +99,7 @@ def main():
       "--times", type=str, default="r", nargs="+", required = False, help="Jaka pora dnia (r/w), domyślnie rano"
    )
    parser.add_argument(
-      "--read_or_write", type=str, default="t", nargs="+", required = False, help="Tworzenie lub odczyt(t/o), domyślnie odczyt"
+      "--read_or_write", type=str, default="t", required = False, help="Tworzenie lub odczyt(t/o), domyślnie odczyt"
    )
    args = parser.parse_args()
 
