@@ -99,5 +99,3 @@ def main():
 
    if(len(args.miesiace) != len(args.dni)):
       raise ValueError("Dla każdego miesiąca musi być podany dzień")
-   
-## Krokson jest smrodem
